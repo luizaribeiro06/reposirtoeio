@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Ac 2 - LP3
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <p>OBS: Entrega em um raio de 20km</p>
+    <ion-list>
+      <ion-item  [(ngModel)]="pesoSelecionado">
+        <ion-select placeholder="Selecione o peso" class="custom-options" (ionChange)="calcular($event)">
+          <ion-select-option value="peso1">Até 1kg</ion-select-option>
+          <ion-select-option value="peso3">1 a 3kg</ion-select-option>
+          <ion-select-option value="peso7">4 a 7 kg</ion-select-option>
+          <ion-select-option value="peso10">8 a 10 kg</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <!-- <ion-list>
+      <ion-item>
+        <ion-select interface="popover" placeholder="Distância">
+          <ion-select-option value="1km a 5km">1km a 5km</ion-select-option>
+          <ion-select-option value="6km a 10km">6km a 10km</ion-select-option>
+          <ion-select-option value="11km a 15km">11km a 15km</ion-select-option>
+          <ion-select-option value="16km a 20km">16km a 20km</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list> --> 
+
+    <ion-list-header> Tipos de entregas </ion-list-header> <!--coloca dentro da lista pois é rolavel apois-->
+
+    <ion-radio-group [(ngModel)]="frete"> <!--oq faz o ngmodel? pega um valor do html e manda par o ts, la no ts precisa ter uma variavel seelecionada para ter o ocnteudo-->
+      <ion-item>
+        <ion-label>Receber amanhã</ion-label>
+        <ion-radio slot="end" value="freteAM"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Receber em 2 dias</ion-label>
+        <ion-radio slot="end" value="frete2"></ion-radio>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Receber em 5 dias</ion-label>
+        <ion-radio slot="end" value="frete5"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Receber em 7 dias</ion-label>
+        <ion-radio slot="end" value="frete7"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+
+  <ion-button fill="outline" (click)="calcular()">Calcular</ion-button>
+  <ion-input [readonly]="true" value="O valor é {{resultado}} reais"></ion-input>
+
+
+  <p>Desconto!</p>
+
+  <ion-list>
+    <ion-item>
+      <ion-select interface="popover" placeholder="Selecione a quantidade de itens"  class="custom-options" (ionChange)="verificaSelecionado($event)>
+        <ion-select-option value="1 a 3">1 a 3</ion-select-option>
+        <ion-select-option value="4 a 7">4 a 7</ion-select-option>
+        <ion-select-option value="Acima de 8">Acima de 8</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="final()">Valor final</ion-button>
+
+</ion-content>
