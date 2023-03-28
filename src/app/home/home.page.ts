@@ -18,13 +18,16 @@ export class HomePage {
   valorFrete5: number=10; //5 dias
   valorFrete7: number=5; //7 dias*/
 
-  distancia: string='';
+  distanciaNum: number=0;
   resultado: number=0;
   item: string='';
   compra: number= 0;
   radioSelecionada: string='';
   radioDesc: string='';
+  pesoNum: number=0;
   peso: string='';
+  distancia: string='';
+  valor: string='';
 
 
   constructor(
@@ -34,8 +37,12 @@ export class HomePage {
   //VALOR COM FRETE
   calcular() { //ta chamando p executar as ações
 
-    this.resultado = (parseFloat(this.peso) * 2)+ (parseFloat(this.distancia) * 4)
+    this.pesoNum = parseFloat(this.peso)
+    this.distanciaNum = parseFloat(this.distancia)
 
+    this.resultado = (parseFloat(this.peso) * 0.5)+ (parseFloat(this.distancia) * 0.1 + (parseFloat(this.valor)))
+
+  
     if(this.radioSelecionada == "freteAM"){
       this.resultado = this.resultado + 20
     }
@@ -43,13 +50,18 @@ export class HomePage {
       this.resultado = this.resultado + 15
     }
     else if(this.radioSelecionada == "frete5"){
-      this.resultado = this.resultado + 10
+      this.resultado = this.resultado + 12
     }
     else if(this.radioSelecionada == "frete7"){
-      this.resultado = this.resultado + 5
+      this.resultado = this.resultado + 10
     }
-  }
   
+
+    if(this.distanciaNum >= 10 && this.pesoNum >= 70){
+      this.resultado = (this.resultado) + ((this.resultado) * 0.7);
+    } 
+  }
+
   verificar(){
     this.calcular()
   }
@@ -83,6 +95,4 @@ export class HomePage {
     this.desconto();
     this.exibirDesconto();
   }
-  
-
 }
