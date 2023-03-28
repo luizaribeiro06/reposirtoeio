@@ -1,3 +1,3 @@
-# Ac2 - lp - 1tri
+# Ac 2 - lp - 1 tri
 - Luiza
 - Nicolle
