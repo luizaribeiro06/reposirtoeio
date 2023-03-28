@@ -22,9 +22,9 @@ export class HomePage {
   resultado: number=0;
   item: string='';
   compra: number= 0;
-  frete: string='';
   radioSelecionada: string='';
-  pesoSelecionado: string='';
+  radioDesc: string='';
+  peso: string='';
 
 
   constructor(
@@ -34,89 +34,43 @@ export class HomePage {
   //VALOR COM FRETE
   calcular() { //ta chamando p executar as ações
 
-    if (this.pesoSelecionado === 'peso1'){
-      this.resultado= 30;
-    }
-    if(this.pesoSelecionado === 'peso3'){
-      this.resultado= 30;
-    }
-    
+    this.resultado = (parseFloat(this.peso) * 2)+ (parseFloat(this.distancia) * 4)
 
-    if (this.pesoSelecionado === 'peso7' && this.frete === 'freteAM'){
-      this.resultado= 15 + 20;
+    if(this.radioSelecionada == "freteAM"){
+      this.resultado = this.resultado + 20
     }
-    if (this.pesoSelecionado === 'peso10' && this.frete === 'freteAM'){
-      this.resultado= 20 + 20;
+    else if(this.radioSelecionada == "frete2"){
+      this.resultado = this.resultado + 15
     }
-
-    if (this.pesoSelecionado === 'peso1' && this.frete === 'frete2'){
-      this.resultado= 10 + 15;
+    else if(this.radioSelecionada == "frete5"){
+      this.resultado = this.resultado + 10
     }
-    if (this.pesoSelecionado === 'peso3' && this.frete === 'frete2'){
-      this.resultado= 12 + 15;
+    else if(this.radioSelecionada == "frete7"){
+      this.resultado = this.resultado + 5
     }
-    if (this.pesoSelecionado === 'peso7' && this.frete === 'frete2'){
-      this.resultado= 15 + 15;
-    }
-    if (this.pesoSelecionado === 'peso10' && this.frete === 'frete2'){
-      this.resultado= 20 + 15; 
-    }
-
-    if (this.pesoSelecionado === 'peso1' && this.frete === 'frete5'){
-      this.resultado= 10 + 10;
-    }
-    if (this.pesoSelecionado === 'peso3' && this.frete === 'frete5'){
-      this.resultado= 12 + 10;
-    }
-    if (this.pesoSelecionado === 'peso7' && this.frete === 'frete5'){
-      this.resultado= 15 + 10;
-    }
-    if (this.pesoSelecionado === 'peso10' && this.frete === 'frete5'){
-      this.resultado= 20 + 10;
-    }
-
-    if (this.pesoSelecionado === 'peso1' && this.frete === 'frete7'){
-      this.resultado= 10 + 5;
-    }
-    if (this.pesoSelecionado === 'peso3' && this.frete === 'frete7'){
-      this.resultado= 12 + 5;
-    }
-    if (this.pesoSelecionado === 'peso7' && this.frete === 'frete7'){
-      this.resultado= 15 + 5;
-    }
-    if (this.pesoSelecionado === 'peso10' && this.frete === 'frete7'){
-      this.resultado= 20 + 5;
-    }
-
-    
   }
-
   
-    calcular (valor: any) { //recebe o parametro (any- esse parametro recebe qqr tipo de valor)
-      let mensagem: string;
-      mensagem = valor.detail.value; //variavel.detail.value //a propriedade $event é detail.value //no caso da multipla seleção a variavel virou um vetor
-      this.exibirAlerta(mensagem);
-    }
+  verificar(){
+    this.calcular()
+  }
   
   
   //DESCONTO
-  final (){
-    if (this.radioSelecionada=== 'item3'){
+  desconto (){
+    if (this.radioDesc=== 'item3'){
       this.compra= (this.resultado);
     }
 
-    if(this.radioSelecionada=== 'item7'){
+    else if(this.radioDesc=== 'item7'){
       this.compra= (this.resultado) - ((this.resultado) * 0.10);
     }
 
-    if(this.radioSelecionada==='item8') {
+    else if(this.radioDesc==='item8') {
       this.compra= (this.resultado ) - ((this.resultado) * 0.15);
     }
-    this.exibirDesconto();
   }
 
-
-   async exibirDesconto() {
+    async exibirDesconto() {
     const alert = await this.alertController.create({
    header: 'O valor total da compra é: ', //cabeçalho
     message: this.compra.toString(), //msg caixinha
@@ -125,5 +79,10 @@ export class HomePage {
     alert.present();
   }
 
+  verificarDesc(){
+    this.desconto();
+    this.exibirDesconto();
+  }
+  
 
 }

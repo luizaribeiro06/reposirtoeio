@@ -6,34 +6,42 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
-  <p>OBS: Entrega em um raio de 20km</p>
-    <ion-list>
-      <ion-item  [(ngModel)]="pesoSelecionado">
-        <ion-select placeholder="Selecione o peso" class="custom-options" (ionChange)="calcular($event)">
-          <ion-select-option value="peso1">Até 1kg</ion-select-option>
-          <ion-select-option value="peso3">1 a 3kg</ion-select-option>
-          <ion-select-option value="peso7">4 a 7 kg</ion-select-option>
-          <ion-select-option value="peso10">8 a 10 kg</ion-select-option>
+  <ion-item>
+    <ion-label position="floating">Digite o peso da mercadoria:</ion-label>
+    <ion-input [(ngModel)]="peso" placeholder="Peso"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Digite a distância:</ion-label>
+    <ion-input [(ngModel)]="distancia" placeholder="Distancia"></ion-input>
+  </ion-item>
+
+    <!-- <ion-list>
+      <ion-item  [(ngModel)]="radioSelecionada">
+        <ion-select placeholder="Selecione o peso">
+          <ion-select-option value="peso">Até 1kg</ion-select-option>
+          <ion-select-option value="peso">1 a 3kg</ion-select-option>
+          <ion-select-option value="peso">4 a 7 kg</ion-select-option>
+          <ion-select-option value="peso">8 a 10 kg</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
 
-    <!-- <ion-list>
+    <ion-list>
       <ion-item>
         <ion-select interface="popover" placeholder="Distância">
-          <ion-select-option value="1km a 5km">1km a 5km</ion-select-option>
-          <ion-select-option value="6km a 10km">6km a 10km</ion-select-option>
-          <ion-select-option value="11km a 15km">11km a 15km</ion-select-option>
-          <ion-select-option value="16km a 20km">16km a 20km</ion-select-option>
+          <ion-select-option value="distancia">1km a 5km</ion-select-option>
+          <ion-select-option value="distancia">6km a 10km</ion-select-option>
+          <ion-select-option value="distancia">11km a 15km</ion-select-option>
+          <ion-select-option value="distancia">16km a 20km</ion-select-option>
         </ion-select>
       </ion-item>
-    </ion-list> --> 
+    </ion-list>  -->
 
     <ion-list-header> Tipos de entregas </ion-list-header> <!--coloca dentro da lista pois é rolavel apois-->
 
-    <ion-radio-group [(ngModel)]="frete"> <!--oq faz o ngmodel? pega um valor do html e manda par o ts, la no ts precisa ter uma variavel seelecionada para ter o ocnteudo-->
+    <div class="frete">
+    <ion-radio-group [(ngModel)]="radioSelecionada"> <!--oq faz o ngmodel? pega um valor do html e manda par o ts, la no ts precisa ter uma variavel seelecionada para ter o ocnteudo-->
       <ion-item>
         <ion-label>Receber amanhã</ion-label>
         <ion-radio slot="end" value="freteAM"></ion-radio>
@@ -57,22 +65,44 @@
     </ion-radio-group>
 
 
-  <ion-button fill="outline" (click)="calcular()">Calcular</ion-button>
+  <ion-button fill="outline" (click)="verificar()">Calcular</ion-button>
   <ion-input [readonly]="true" value="O valor é {{resultado}} reais"></ion-input>
 
-
+</div>
   <p>Desconto!</p>
-
-  <ion-list>
+<ion-list-header> Quantidade de itens </ion-list-header>
+  <ion-list> 
     <ion-item>
-      <ion-select interface="popover" placeholder="Selecione a quantidade de itens"  class="custom-options" (ionChange)="verificaSelecionado($event)>
-        <ion-select-option value="1 a 3">1 a 3</ion-select-option>
-        <ion-select-option value="4 a 7">4 a 7</ion-select-option>
-        <ion-select-option value="Acima de 8">Acima de 8</ion-select-option>
+      <ion-select [(ngModel)]="radioDesc" interface="popover" placeholder="Selecione a quantidade de itens">
+        <ion-select-option value="item3">1 a 3</ion-select-option>
+        <ion-select-option value="item7">4 a 7</ion-select-option>
+        <ion-select-option value="item8">Acima de 8</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="block" (click)="final()">Valor final</ion-button>
+
+  <!-- <ion-list-header> Quantidade de itens </ion-list-header>
+  <ion-radio-group [(ngModel)]="radioDesc"> 
+    <ion-item>
+      <ion-label>1 a 3</ion-label>
+      <ion-radio slot="end" value="item3"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>4 a 7</ion-label>
+      <ion-radio slot="end" value="item7"></ion-radio>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Acima de 8</ion-label>
+      <ion-radio slot="end" value="item8"></ion-radio>
+    </ion-item>
+    
+  </ion-radio-group> -->
+
+  <ion-button fill="outline" (click)="verificarDesc()">Valor final</ion-button>
+
 
 </ion-content>
